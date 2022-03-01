@@ -141,8 +141,10 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
         // the final read after all thread have finished reading and writing
         // each page visit number should be equal to the index of the page * number of writer threads
 
+        // the final read after all thread have finished writing
+        // each page visit number should be equal to the index of the page
         // For eg.
-        // number of writer Threads = 1
+        // number of writer Threads / page = 1
         // "A" at index 0 will be called 1 times
         // "B" at index 1 will be called 2 times
         // "C" at index 2 will be called 3 times... etc.

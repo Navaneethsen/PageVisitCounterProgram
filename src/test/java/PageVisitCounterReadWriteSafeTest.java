@@ -76,7 +76,11 @@ public class PageVisitCounterReadWriteSafeTest
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
         PageVisitCounterReadWriteSafe pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
 
+        // set the number of writeThreads to be equal to the number of pages we have
+        // in our case, we have 6 pages, so we use a thread for each page's updates
         numberOfWriterThreads = pageNameList.length;
+
+        // the number of threads to read the result from the pageViewCounter
         numberOfReaderThreads = 1;
 
         for (int writerIndex = 0; writerIndex < numberOfWriterThreads; writerIndex++)
@@ -123,7 +127,6 @@ public class PageVisitCounterReadWriteSafeTest
             writer.start();
         }
 
-
         // Wait for all Writer Threads to finish
         // can also set the time limit based on the requirement
         for (Thread writer : writers) {
@@ -137,14 +140,13 @@ public class PageVisitCounterReadWriteSafeTest
             }
         }
 
-        // the final read after all thread have finished reading and writing
-        // each page visit number should be equal to the index of the page * number of writer threads
-
+        // the final read after all thread have finished writing
+        // each page visit number should be equal to the index of the page
         // For eg.
-        // number of writer Threads = 1
-        // "A" will be called 1000 times
-        // "B" will be called 2000 times
-        // "C" will be called 3000 times... etc.
+        // number of writer Threads / page = 1
+        // "A" at index 0 will be called 1 times
+        // "B" at index 1 will be called 2 times
+        // "C" at index 2 will be called 3 times... etc.
         for (int i = 0; i < pageNameList.length; i++)
         {
             Assert.assertEquals(pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[i]), i+1);
@@ -240,9 +242,9 @@ public class PageVisitCounterReadWriteSafeTest
 
         // For eg.
         // number of writer Threads = 1000
-        // "A" will be called 1000 times
-        // "B" will be called 2000 times
-        // "C" will be called 3000 times... etc.
+        // "A" at index 0 will be called 1000 times
+        // "B" at index 1 will be called 2000 times
+        // "C" at index 2 will be called 3000 times... etc.
         for (int i = 0; i < pageNameList.length; i++)
         {
             Assert.assertEquals(pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[i]), (i+1) * MULTIPLIER);
