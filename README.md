@@ -59,7 +59,7 @@ I have used Java 11 SDK to compile and run the program.
 
 
 ## Things to Improve
-* Optimize the code using lambdas available with the ConcurrentHashMap functions.
+* ~~Optimize the code using lambdas available with the ConcurrentHashMap functions.~~
 
 ## License
 
