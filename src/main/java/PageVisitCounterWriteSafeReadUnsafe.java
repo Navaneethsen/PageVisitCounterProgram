@@ -78,6 +78,6 @@ public class PageVisitCounterWriteSafeReadUnsafe
      */
     public long getPageVisitsUnsafe(String page)
     {
-        return pageViewMap.get(page) != null ? pageViewMap.get(page): 0;
+        return pageViewMap.getOrDefault(page, 0L);
     }
 }

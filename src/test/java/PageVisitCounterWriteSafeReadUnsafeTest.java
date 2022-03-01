@@ -283,5 +283,4 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
             Assert.assertEquals(pageVisitCounterWriteSafeReadUnsafe.getPageVisits(pageNameList[i]), (i+1) * MULTIPLIER);
         }
     }
-
 }
