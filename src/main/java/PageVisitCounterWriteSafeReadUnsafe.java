@@ -38,7 +38,9 @@ public class PageVisitCounterWriteSafeReadUnsafe
         try
         {
             // increment the existing value
-            pageViewMap.put(page, pageViewMap.get(page) != null ? pageViewMap.get(page) + 1 : 1L);
+            pageViewMap.computeIfPresent(page, (key, val) -> val + 1);
+            // if not present, add the default value as 1
+            pageViewMap.putIfAbsent(page, 1L);
         }
         finally
         {
@@ -59,7 +61,7 @@ public class PageVisitCounterWriteSafeReadUnsafe
         reentrantLock.lock();
         try
         {
-            return pageViewMap.get(page) != null ? pageViewMap.get(page): 0;
+            return pageViewMap.getOrDefault(page, 0L);
         }
         finally
         {

@@ -38,9 +38,10 @@ public class PageVisitCounterReadWriteSafe
         writeLock.lock();
         try
         {
-            // increment the existing value and put it back to the map
-            // if not present, initialize with 1
-            pageViewMap.put(page, pageViewMap.get(page) != null ? pageViewMap.get(page) + 1 : 1L);
+            // increment the existing value
+            pageViewMap.computeIfPresent(page, (key, val) -> val + 1);
+            // if not present, add the default value as 1
+            pageViewMap.putIfAbsent(page, 1L);
         }
         // critical section ends
         finally
@@ -64,7 +65,7 @@ public class PageVisitCounterReadWriteSafe
         readLock.lock();
         try
         {
-            return pageViewMap.get(page) != null ? pageViewMap.get(page): 0;
+            return pageViewMap.getOrDefault(page, 0L);
         }
         finally
         {
