@@ -96,8 +96,7 @@ public class PageVisitCounterReadWriteSafeTest
                 int count = index;
                 while (count > -1)
                 {
-                    String pageName = pageNameList[index];
-                    pageVisitCounterReadWriteSafe.onPageVisit(pageName);
+                    pageVisitCounterReadWriteSafe.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
@@ -175,8 +174,7 @@ public class PageVisitCounterReadWriteSafeTest
                 int count = index;
                 while (count > -1)
                 {
-                    String pageName = pageNameList[index];
-                    pageVisitCounterReadWriteSafe.onPageVisit(pageName);
+                    pageVisitCounterReadWriteSafe.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
@@ -199,6 +197,40 @@ public class PageVisitCounterReadWriteSafeTest
             writer.setDaemon(true);
             // add the thread to the list
             writers.add(writer);
+        }
+
+        // Reader threads just crunching the writes
+        for (int readerIndex = 0; readerIndex < numberOfReaderThreads; readerIndex++)
+        {
+            // get the index for the list, so that we can call the onPageVisit for it
+            int index = readerIndex % pageNameList.length;
+            Thread reader = new Thread(() -> {
+                // number of times to call will be == the index of the pageName in the pageNameList
+
+                int count = 0;
+                while (count < 5)
+                {
+                    pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[index]);
+                    // sleep for 100 ms for activating the priority inversion between threads
+                    try
+                    {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        System.out.println("The Thread was Interrupted!" + e);
+                    }
+
+                    // decrement the count
+                    count = count + 1;
+                }
+            });
+            // we can make this a daemon thread, if we fear this might take a very long time
+            // and can block the main program from finishing
+            // it also makes sure the threads are cleaned up when the main thread exits
+            reader.setDaemon(true);
+            // add the thread to the list
+            readers.add(reader);
         }
 
         // Start all Writer Threads
