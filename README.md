@@ -40,9 +40,11 @@ I have tried to implement the PageViewCounter in ~~two~~ three ways:
 
 The code is extensively commented to give an idea on my thinking while developing this code.
 
-To compile the project:
+**To compile and run the project:**
 * checkout the project first using `git clone`
 * run `mvn clean install` in the parent directory
+* you can also run `mvn test` to run the tests
+
 * you will see the below lines which shows all the tests passed
 ```
 -------------------------------------------------------
