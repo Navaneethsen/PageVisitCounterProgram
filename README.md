@@ -38,6 +38,8 @@ I have tried to implement the PageViewCounter in ~~two~~ three ways:
 **Update - 02March2022**
 * I have implemented a new one with No explicit locking by using a Long Adder
 
+![Class Diagram](class_diagram.png)
+
 The code is extensively commented to give an idea on my thinking while developing this code.
 
 **To compile and run the project:**
