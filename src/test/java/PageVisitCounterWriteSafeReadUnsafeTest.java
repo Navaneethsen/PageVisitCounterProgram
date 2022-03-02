@@ -283,4 +283,77 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
             Assert.assertEquals(pageVisitCounterWriteSafeReadUnsafe.getPageVisits(pageNameList[i]), (i+1) * MULTIPLIER);
         }
     }
+
+    @Test
+    public void getPageVisitNonExistingPage()
+    {
+        // create an instance of the PageVisitCounterWriteSafeReadUnsafe
+        PageVisitCounterWriteSafeReadUnsafe pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
+
+        // set the number of writeThreads to be equal to the number of pages we have
+        // in our case, we have 6 pages, so we use a thread for each page's updates
+        numberOfWriterThreads = pageNameList.length;
+
+        // the number of threads to read the result from the pageViewCounter
+        numberOfReaderThreads = 1;
+
+        for (int writerIndex = 0; writerIndex < numberOfWriterThreads; writerIndex++)
+        {
+            // get the index for the list, so that we can call the onPageVisit for it
+            int index = writerIndex % pageNameList.length;
+            Thread writer = new Thread(() -> {
+                // number of times to call will be == the index of the pageName in the pageNameList
+                // For eg.
+                // "A" will be called 1 time
+                // "B" will be called 2 times
+                // "C" will be called 3 times... etc.
+                int count = index;
+                while (count > -1)
+                {
+                    pageVisitCounterWriteSafeReadUnsafe.onPageVisit(pageNameList[index]);
+
+                    // sleep for 100 ms for activating the priority inversion between threads
+                    try
+                    {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        System.out.println("The Thread was Interrupted!" + e);
+                    }
+
+                    // decrement the count
+                    count = count - 1;
+                }
+            });
+
+            // we can make this a daemon thread, if we fear this might take a very long time
+            // and can block the main program from finishing
+            // it also makes sure the threads are cleaned up when the main thread exits
+            writer.setDaemon(true);
+            // add the thread to the list
+            writers.add(writer);
+        }
+
+        // Start all Writer Threads
+        for (Thread writer : writers) {
+            writer.start();
+        }
+
+        // Wait for all Writer Threads to finish
+        // can also set the time limit based on the requirement
+        for (Thread writer : writers) {
+            try
+            {
+                writer.join();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        Assert.assertEquals(pageVisitCounterWriteSafeReadUnsafe.getPageVisits("ABCD"), 0);
+        Assert.assertEquals(pageVisitCounterWriteSafeReadUnsafe.getPageVisitsUnsafe("ABCD"), 0);
+    }
 }
