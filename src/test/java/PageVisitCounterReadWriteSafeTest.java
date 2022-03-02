@@ -49,7 +49,7 @@ public class PageVisitCounterReadWriteSafeTest
     public void setUp() throws Exception
     {
         // a list of dummy pages
-        pageNameList = new String[] {"A", "B", "C", "D", "E", "F"};
+        pageNameList = new String[]{"A", "B", "C", "D", "E", "F"};
 
         // the number of writer threads to have parallel write scenario
         // I am going to have 60000 threads here
@@ -123,13 +123,15 @@ public class PageVisitCounterReadWriteSafeTest
         }
 
         // Start all Writer Threads
-        for (Thread writer : writers) {
+        for (Thread writer : writers)
+        {
             writer.start();
         }
 
         // Wait for all Writer Threads to finish
         // can also set the time limit based on the requirement
-        for (Thread writer : writers) {
+        for (Thread writer : writers)
+        {
             try
             {
                 writer.join();
@@ -149,7 +151,7 @@ public class PageVisitCounterReadWriteSafeTest
         // "C" at index 2 will be called 3 times... etc.
         for (int i = 0; i < pageNameList.length; i++)
         {
-            Assert.assertEquals(pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[i]), i+1);
+            Assert.assertEquals(pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[i]), i + 1);
         }
     }
 
@@ -237,18 +239,21 @@ public class PageVisitCounterReadWriteSafeTest
         }
 
         // Start all Writer Threads
-        for (Thread writer : writers) {
+        for (Thread writer : writers)
+        {
             writer.start();
         }
 
         // Start all Reader Threads
-        for (Thread reader : readers) {
+        for (Thread reader : readers)
+        {
             reader.start();
         }
 
         // Wait for all Writer Threads to finish
         // can also set the time limit based on the requirement
-        for (Thread writer : writers) {
+        for (Thread writer : writers)
+        {
             try
             {
                 writer.join();
@@ -261,7 +266,8 @@ public class PageVisitCounterReadWriteSafeTest
 
         // Wait for all Reader Threads to finish
         // can also set the time limit based on the requirement
-        for (Thread reader : readers) {
+        for (Thread reader : readers)
+        {
             try
             {
                 reader.join();
@@ -282,7 +288,7 @@ public class PageVisitCounterReadWriteSafeTest
         // "C" at index 2 will be called 3000 times... etc.
         for (int i = 0; i < pageNameList.length; i++)
         {
-            Assert.assertEquals(pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[i]), (i+1) * MULTIPLIER);
+            Assert.assertEquals(pageVisitCounterReadWriteSafe.getPageVisits(pageNameList[i]), (i + 1) * MULTIPLIER);
         }
     }
 
@@ -339,13 +345,15 @@ public class PageVisitCounterReadWriteSafeTest
         }
 
         // Start all Writer Threads
-        for (Thread writer : writers) {
+        for (Thread writer : writers)
+        {
             writer.start();
         }
 
         // Wait for all Writer Threads to finish
         // can also set the time limit based on the requirement
-        for (Thread writer : writers) {
+        for (Thread writer : writers)
+        {
             try
             {
                 writer.join();

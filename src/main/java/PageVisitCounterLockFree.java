@@ -1,9 +1,6 @@
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.LongAdder;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.function.Consumer;
 
 /**
  * The type Page visit counter lock free.
@@ -26,8 +23,9 @@ public class PageVisitCounterLockFree
      *
      * @param page the page
      */
-    public void onPageVisit(String page) {
-        if(page == null)
+    public void onPageVisit(String page)
+    {
+        if (page == null)
         {
             // throw a meaningful exception
             return;

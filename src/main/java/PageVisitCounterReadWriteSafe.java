@@ -26,8 +26,9 @@ public class PageVisitCounterReadWriteSafe
      *
      * @param page the page
      */
-    public void onPageVisit(String page) {
-        if(page == null)
+    public void onPageVisit(String page)
+    {
+        if (page == null)
         {
             // throw a meaningful exception
             return;
@@ -58,7 +59,8 @@ public class PageVisitCounterReadWriteSafe
      * @param page the page
      * @return the page visits
      */
-    public long getPageVisits(String page) {
+    public long getPageVisits(String page)
+    {
 
         // use this to lock for prtecting the reads
         // multiple thread can acuire this lock at the same time as long as a write lock is not acquired
