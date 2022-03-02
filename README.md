@@ -31,9 +31,12 @@ Please use the below skeleton for the implementation of the logic
 ```
 
 ## Developer Notes
-I have tried to implement the PageViewCounter in two ways:
+I have tried to implement the PageViewCounter in ~~two~~ three ways:
 * One with both the Write and Read are protected using ReentrantReadWriteLock.
 * Another one with the Write protected and non-protected read using ReentrantLock.
+
+**Update - 02March2022**
+* I have implemented a new one with No explicit locking by using a Long Adder
 
 The code is extensively commented to give an idea on my thinking while developing this code.
 
