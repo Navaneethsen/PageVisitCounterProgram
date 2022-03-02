@@ -46,16 +46,19 @@ To compile the project:
 * you will see the below lines which shows all the tests passed
 ```
 -------------------------------------------------------
-T E S T S
+ T E S T S
 -------------------------------------------------------
 Running PageVisitCounterWriteSafeReadUnsafeTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.779 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.603 sec
+Running PageVisitCounterLockFreeTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.448 sec
 Running PageVisitCounterReadWriteSafeTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.657 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.485 sec
 
 Results :
 
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+
 ```
 
 I have used Java 11 SDK to compile and run the program.
