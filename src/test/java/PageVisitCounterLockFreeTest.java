@@ -74,7 +74,7 @@ public class PageVisitCounterLockFreeTest
     {
 
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterLockFree pageVisitCounterLockFree = new PageVisitCounterLockFree();
+        PageVisitCounter pageVisitCounterLockFree = new PageVisitCounterLockFree();
 
         // set the number of writeThreads to be equal to the number of pages we have
         // in our case, we have 6 pages, so we use a thread for each page's updates
@@ -165,7 +165,7 @@ public class PageVisitCounterLockFreeTest
     public void onPageVisitMultipleThreadWriteConcurrentWithMultipleThreadRead()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterLockFree pageVisitCounterLockFree = new PageVisitCounterLockFree();
+        PageVisitCounter pageVisitCounterLockFree = new PageVisitCounterLockFree();
 
         for (int writerIndex = 0; writerIndex < numberOfWriterThreads; writerIndex++)
         {
@@ -305,7 +305,7 @@ public class PageVisitCounterLockFreeTest
     public void getPageVisitNonExistingPage()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterLockFree pageVisitCounterLockFree = new PageVisitCounterLockFree();
+        PageVisitCounter pageVisitCounterLockFree = new PageVisitCounterLockFree();
 
         // set the number of writeThreads to be equal to the number of pages we have
         // in our case, we have 6 pages, so we use a thread for each page's updates

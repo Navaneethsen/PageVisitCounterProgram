@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @version 1.0
  * @date 2022 /03/01
  */
-public class PageVisitCounterReadWriteSafe
+public class PageVisitCounterReadWriteSafe implements PageVisitCounter
 {
     // I am using a ConcurrentHashMap, because I think this is a highly concurrent module and
     // we are tending to have lots of key/value reads between multiple threads

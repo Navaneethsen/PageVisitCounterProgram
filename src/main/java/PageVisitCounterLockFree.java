@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.LongAdder;
  * @version 1.0
  * @date 2022 /03/01
  */
-public class PageVisitCounterLockFree
+public class PageVisitCounterLockFree implements PageVisitCounter
 {
     // I am using a ConcurrentHashMap, because I think this is a highly concurrent module and
     // we are tending to have lots of key/value reads between multiple threads
@@ -23,6 +23,7 @@ public class PageVisitCounterLockFree
      *
      * @param page the page
      */
+    @Override
     public void onPageVisit(String page)
     {
         if (page == null)
@@ -43,6 +44,7 @@ public class PageVisitCounterLockFree
      * @param page the page
      * @return the page visits
      */
+    @Override
     public long getPageVisits(String page)
     {
         // return the long value if not null else return 0

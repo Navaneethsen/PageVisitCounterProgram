@@ -74,7 +74,7 @@ public class PageVisitCounterReadWriteSafeTest
     {
 
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterReadWriteSafe pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
+        PageVisitCounter pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
 
         // set the number of writeThreads to be equal to the number of pages we have
         // in our case, we have 6 pages, so we use a thread for each page's updates
@@ -165,7 +165,7 @@ public class PageVisitCounterReadWriteSafeTest
     public void onPageVisitMultipleThreadWriteConcurrentWithMultipleThreadRead()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterReadWriteSafe pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
+        PageVisitCounter pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
 
         for (int writerIndex = 0; writerIndex < numberOfWriterThreads; writerIndex++)
         {
@@ -305,7 +305,7 @@ public class PageVisitCounterReadWriteSafeTest
     public void getPageVisitNonExistingPage()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterReadWriteSafe pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
+        PageVisitCounter pageVisitCounterReadWriteSafe = new PageVisitCounterReadWriteSafe();
 
         // set the number of writeThreads to be equal to the number of pages we have
         // in our case, we have 6 pages, so we use a thread for each page's updates

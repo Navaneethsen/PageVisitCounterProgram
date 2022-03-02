@@ -73,7 +73,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
     public void onPageVisitSingleWriteThreadForEachPageFollowedByRead()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterWriteSafeReadUnsafe pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
+        PageVisitCounter pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
 
         numberOfWriterThreads = pageNameList.length;
         numberOfReaderThreads = 1;
@@ -164,7 +164,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
     public void onPageVisitMultipleThreadWriteConcurrentWithMultipleThreadRead()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterWriteSafeReadUnsafe pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
+        PageVisitCounter pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
 
         for (int writerIndex = 0; writerIndex < numberOfWriterThreads; writerIndex++)
         {
@@ -220,7 +220,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
                 while (count < 5)
                 {
                     // do the get page visit call
-                    pageVisitCounterWriteSafeReadUnsafe.getPageVisitsUnsafe(pageNameList[index]);
+                    pageVisitCounterWriteSafeReadUnsafe.getPageVisits(pageNameList[index]);
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
                     {
@@ -304,7 +304,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
     public void getPageVisitNonExistingPage()
     {
         // create an instance of the PageVisitCounterWriteSafeReadUnsafe
-        PageVisitCounterWriteSafeReadUnsafe pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
+        PageVisitCounter pageVisitCounterWriteSafeReadUnsafe = new PageVisitCounterWriteSafeReadUnsafe();
 
         // set the number of writeThreads to be equal to the number of pages we have
         // in our case, we have 6 pages, so we use a thread for each page's updates
@@ -376,6 +376,6 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
         }
 
         Assert.assertEquals(pageVisitCounterWriteSafeReadUnsafe.getPageVisits("ABCD"), 0);
-        Assert.assertEquals(pageVisitCounterWriteSafeReadUnsafe.getPageVisitsUnsafe("ABCD"), 0);
+        Assert.assertEquals(((PageVisitCounterWriteSafeReadUnsafe)pageVisitCounterWriteSafeReadUnsafe).getPageVisitsSafe("ABCD"), 0);
     }
 }
