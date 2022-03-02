@@ -117,6 +117,9 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
             writers.add(writer);
         }
 
+        // check if we have the same number of writer threads as we spawned
+        Assert.assertEquals(writers.size(), pageNameList.length);
+
         // Start all Writer Threads
         for (Thread writer : writers)
         {
@@ -202,6 +205,9 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
             writers.add(writer);
         }
 
+        // check if we have the same number of writer threads as we spawned
+        Assert.assertEquals(writers.size(), pageNameList.length * MULTIPLIER);
+
         // Reader threads just crunching the writes
         for (int readerIndex = 0; readerIndex < numberOfReaderThreads; readerIndex++)
         {
@@ -236,6 +242,9 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
             // add the thread to the list
             readers.add(reader);
         }
+
+        // check if we have the same number of readers threads as we spawned
+        Assert.assertEquals(readers.size(), MULTIPLIER);
 
         // Start all Writer Threads
         for (Thread writer : writers)
@@ -342,6 +351,9 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
             // add the thread to the list
             writers.add(writer);
         }
+
+        // check if we have the same number of writer threads as we spawned
+        Assert.assertEquals(writers.size(), pageNameList.length);
 
         // Start all Writer Threads
         for (Thread writer : writers)

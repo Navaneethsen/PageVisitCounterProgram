@@ -122,6 +122,9 @@ public class PageVisitCounterLockFreeTest
             writers.add(writer);
         }
 
+        // check if we have the same number of writer threads as we spawned
+        Assert.assertEquals(writers.size(), pageNameList.length);
+
         // Start all Writer Threads
         for (Thread writer : writers)
         {
@@ -183,7 +186,7 @@ public class PageVisitCounterLockFreeTest
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
                     {
-                        Thread.sleep(100);
+                        Thread.sleep((int) (Math.random() * (100 - 10)) + 10);
                     }
                     catch (InterruptedException e)
                     {
@@ -203,6 +206,9 @@ public class PageVisitCounterLockFreeTest
             writers.add(writer);
         }
 
+        // check if we have the same number of writer threads as we spawned
+        Assert.assertEquals(writers.size(), pageNameList.length*MULTIPLIER);
+
         // Reader threads just crunching the writes
         for (int readerIndex = 0; readerIndex < numberOfReaderThreads; readerIndex++)
         {
@@ -219,7 +225,7 @@ public class PageVisitCounterLockFreeTest
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
                     {
-                        Thread.sleep(100);
+                        Thread.sleep((int) (Math.random() * (100 - 10)) + 10);
                     }
                     catch (InterruptedException e)
                     {
@@ -237,6 +243,9 @@ public class PageVisitCounterLockFreeTest
             // add the thread to the list
             readers.add(reader);
         }
+
+        // check if we have the same number of reader threads as we spawned
+        Assert.assertEquals(readers.size(), MULTIPLIER);
 
         // Start all Writer Threads
         for (Thread writer : writers)
@@ -343,6 +352,9 @@ public class PageVisitCounterLockFreeTest
             // add the thread to the list
             writers.add(writer);
         }
+
+        // check if we have the same number of writer threads as we spawned
+        Assert.assertEquals(writers.size(), pageNameList.length);
 
         // Start all Writer Threads
         for (Thread writer : writers)
