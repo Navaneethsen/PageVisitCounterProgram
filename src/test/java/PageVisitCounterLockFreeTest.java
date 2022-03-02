@@ -38,7 +38,7 @@ public class PageVisitCounterLockFreeTest
     /**
      * The Multiplier.
      */
-    final int MULTIPLIER = 10000;
+    final int MULTIPLIER = 1000;
 
     /**
      * Sets up.
