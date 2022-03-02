@@ -93,6 +93,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
                 int count = index;
                 while (count > -1)
                 {
+                    // do the page visit call
                     pageVisitCounterWriteSafeReadUnsafe.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
@@ -175,6 +176,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
                 int count = index;
                 while (count > -1)
                 {
+                    // do the page visit call
                     pageVisitCounterWriteSafeReadUnsafe.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
@@ -211,6 +213,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
                 int count = 0;
                 while (count < 5)
                 {
+                    // do the get page visit call
                     pageVisitCounterWriteSafeReadUnsafe.getPageVisitsUnsafe(pageNameList[index]);
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
@@ -310,6 +313,7 @@ public class PageVisitCounterWriteSafeReadUnsafeTest
                 int count = index;
                 while (count > -1)
                 {
+                    // do the get page visit call
                     pageVisitCounterWriteSafeReadUnsafe.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads

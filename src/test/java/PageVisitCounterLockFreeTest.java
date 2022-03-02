@@ -40,7 +40,7 @@ public class PageVisitCounterLockFreeTest
     /**
      * The Multiplier.
      */
-    final int MULTIPLIER = 1000;
+    final int MULTIPLIER = 10000;
 
     /**
      * Sets up.
@@ -98,6 +98,7 @@ public class PageVisitCounterLockFreeTest
                 int count = index;
                 while (count > -1)
                 {
+                    // do the page visit call
                     pageVisitCounterLockFree.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
@@ -176,6 +177,7 @@ public class PageVisitCounterLockFreeTest
                 int count = index;
                 while (count > -1)
                 {
+                    // do the page visit call
                     pageVisitCounterLockFree.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
@@ -212,6 +214,7 @@ public class PageVisitCounterLockFreeTest
                 int count = 0;
                 while (count < 5)
                 {
+                    // do the get page visit call
                     pageVisitCounterLockFree.getPageVisits(pageNameList[index]);
                     // sleep for 100 ms for activating the priority inversion between threads
                     try
@@ -311,6 +314,7 @@ public class PageVisitCounterLockFreeTest
                 int count = index;
                 while (count > -1)
                 {
+                    // do the page visit call
                     pageVisitCounterLockFree.onPageVisit(pageNameList[index]);
 
                     // sleep for 100 ms for activating the priority inversion between threads
